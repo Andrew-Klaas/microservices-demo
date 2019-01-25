@@ -9,10 +9,13 @@ spec:
     metadata:
       labels:
         name: front-end
+      annotations:
+        "consul.hashicorp.com/connect-inject": "true"
+        "consul.hashicorp.com/connect-service-upstreams": "catalogue:8001,carts:8002,orders:8003,user:8004"
     spec:
       containers:
       - name: front-end
-        image: weaveworksdemos/front-end:0.3.12
+        image: tradel/front-end:0.3.14
         resources:
           limits:
             cpu: 300m
