@@ -10,4 +10,4 @@ frontend:
     replicas: 1
 loadtest:
     replicas: 2
-    enabled: false
+    enabled: true
