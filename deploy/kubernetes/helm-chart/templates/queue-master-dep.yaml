@@ -11,10 +11,15 @@ spec:
     metadata:
       labels:
         name: queue-master
+      annotations:
+        "consul.hashicorp.com/connect-inject": "true"
+        "consul.hashicorp.com/connect-service-upstreams": "rabbitmq:5672"
     spec:
       containers:
       - name: queue-master
         image: weaveworksdemos/queue-master:0.3.1
+        args: 
+         - "-Dspring.rabbitmq.host=localhost"
         env:
          {{- if .Values.zipkin.enabled }}
          - name: ZIPKIN

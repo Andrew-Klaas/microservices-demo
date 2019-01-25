@@ -11,10 +11,15 @@ spec:
     metadata:
       labels:
         name: orders
+      annotations:
+        "consul.hashicorp.com/connect-inject": "true"
+        "consul.hashicorp.com/connect-service-upstreams": "orders-db:27017"
     spec:
       containers:
       - name: orders
         image: weaveworksdemos/orders:0.4.7
+        args:
+         - "--db=localhost"
         env:
          {{- if .Values.zipkin.enabled }}
          - name: ZIPKIN

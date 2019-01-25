@@ -11,10 +11,17 @@ spec:
     metadata:
       labels:
         name: catalogue
+      annotations:
+        "consul.hashicorp.com/connect-inject": "true"
+        "consul.hashicorp.com/connect-service-upstreams": "catalogue-db:3306"
     spec:
       containers:
       - name: catalogue
         image: weaveworksdemos/catalogue:0.3.5
+        command:
+         - "/app"
+         - "-port=80"
+         - "-DSN=catalogue_user:default_password@tcp(localhost:3306)/socksdb"
         {{- if .Values.zipkin.enabled }}
         env:
          - name: ZIPKIN

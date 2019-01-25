@@ -11,10 +11,15 @@ spec:
     metadata:
       labels:
         name: carts
+      annotations:
+        "consul.hashicorp.com/connect-inject": "true"
+        "consul.hashicorp.com/connect-service-upstreams": "carts-db:27017"
     spec:
       containers:
       - name: carts
         image: weaveworksdemos/carts:0.4.8
+        args:
+         - "--db=localhost"
         env:
          {{- if .Values.zipkin.enabled }}
          - name: ZIPKIN

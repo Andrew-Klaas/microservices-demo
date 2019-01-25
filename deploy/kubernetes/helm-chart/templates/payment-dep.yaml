@@ -11,6 +11,8 @@ spec:
     metadata:
       labels:
         name: payment
+      annotations:
+        "consul.hashicorp.com/connect-inject": "true"
     spec:
       containers:
       - name: payment
